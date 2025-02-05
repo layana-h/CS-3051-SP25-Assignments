@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door Lock</title>
+    <style>
+        body {background-color: black;
+            color: white ;
+            text-align: center;
+        }
+
+        .door {
+            width: 150px;
+            height: 250px;
+            margin: 20px auto;
+            background-color: brown;
+            border: 5px solid rgb(255, 255, 255);
+        }
+
+        .unlocked {
+            background-color: green;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            width: 60px;
+            height: 60px;
+            font-size:20px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>enter 4-digit code to unlock door</h2>
+    <div id="door" class="door"></div>
+
+    <div class="keypad">
+        <button onclick="addToCode(1)">1</button>
+        <button onclick="addToCode(2)">2</button>
+        <button onclick="addToCode(3)">3</button>
+        <button onclick="addToCode(4)">4</button>
+        <button onclick="addToCode(5)">5</button>
+        <button onclick="addToCode(6)">6</button>
+        <button onclick="addToCode(7)">7</button>
+        <button onclick="addToCode(8)">8</button>
+        <button onclick="addToCode(9)">9</button>
+    </div>
+
+    <script src="doorcode.js"></script>
+
+</body>
+</html>
