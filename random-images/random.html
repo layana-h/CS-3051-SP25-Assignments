@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Image Viewer</title>
+</head>
+<body>
+  <h1>Click the Button to See a Random Image</h1>
+
+  <button id="getImage">Get Random Image</button>
+  <br><br>
+
+  <img id="randomImg" src="" alt="Random image will appear here" width="300">
+
+  <script>
+    document.getElementById("getImage").addEventListener("click", () => {
+      fetch("/random-image")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("randomImg").src = data.url;
+        })
+        .catch(err => {
+          console.error("Error fetching image:", err);
+        });
+    });
+  </script>
+</body>
+</html>

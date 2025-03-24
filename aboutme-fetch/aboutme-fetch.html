@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aboutmeFetch</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-areas: "header header" "menu content" "footer footer";
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            grid-area: header;
+            background: #d89ba3;
+            padding: 15px;
+            font-size: 24px;
+        }
+        nav {
+            grid-area: menu;
+            background: #a3d89b;
+            padding: 15px;
+        }
+        nav a {
+            display: block;
+            padding: 10px;
+            color: black;
+        }
+        nav a.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        main {
+            grid-area: content;
+            background: #f5f5dc;
+            padding: 20px;
+        }
+        footer {
+            grid-area: footer;
+            background: #d89ba3;
+            padding: 10px;
+        }
+        @media (max-width: 600px) {
+            body {
+                grid-template-areas: "header" "menu" "content" "footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto;
+            }
+        }
+    </style>
+    <script>
+        function showContent(section) {
+            fetch(`/${section}.html`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('content').innerHTML = data;
+                });
+            document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+            document.getElementById(section + '-link').classList.add('active');
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            showContent('home'); 
+        });
+    </script>
+</head>
+<body>
+    <header>Layana Hamdallah</header>
+    <nav>
+        <a href="#" id="home-link" class="active" onclick="showContent('home')">Home</a>
+        <a href="#" id="likes-link" onclick="showContent('likes')">Likes</a>
+        <a href="#" id="places-link" onclick="showContent('places')">Places</a>
+    </nav>
+    <main id="content">
+
+    </main>
+    <footer>Copyright &copy; 2025 Layana Hamdallah</footer>
+</body>
+</html>
