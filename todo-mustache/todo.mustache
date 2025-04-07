@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="/todo.css">
+</head>
+<body>
+    <h1>My To-do List</h1>
+    <div id="input-container">
+        <select id="list-select">
+            <option value="home" {{#homeSelected}}selected{{/homeSelected}}>Home</option>
+            <option value="school" {{#schoolSelected}}selected{{/schoolSelected}}>School</option>
+            <option value="work" {{#workSelected}}selected{{/workSelected}}>Work</option>
+        </select>
+        <input type="text" id="todo-input" placeholder="Type a new to-do here">
+        <button id="add-btn">Add to-do</button>
+    </div>
+    <ul id="todo-list">
+        {{#todos}}
+        <li class="{{#completed}}checked{{/completed}}">
+            <input type="checkbox" {{#completed}}checked{{/completed}} data-id="{{id}}">
+            <span>{{text}}</span>
+            <button data-id="{{id}}">X</button>
+        </li>
+        {{/todos}}
+    </ul>
+    <script>
+        const selectedList = "{{selectedList}}";
+    </script>
+    <script src="/todo.js"></script>
+</body>
+</html>
