@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Middle East Interactive Globe</title>
+  <link rel="stylesheet" href="index.css"/>
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <script src="countries.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="site-title">
+        <h1>Travel Tracker</h1>
+        <div class="subtitle">~ Middle East Version ~</div>
+      </div>
+      <nav class="site-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="login.html" class="nav-link">Login/Sign Up</a>
+        <a href="#" id="logout-link" class="nav-link">Log Out</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="layout">
+    <div id="chartdiv">
+      <div id="notecard" class="notecard hidden">
+        <div class="notecard-header">
+          <span class="notecard-close">×</span>
+        </div>
+        <div class="notecard-body">
+          <img id="notecard-image" style="width:100%;border-radius:8px;margin-bottom:10px;" />
+          <h2 id="notecard-title"></h2>
+          <p id="notecard-text"></p>
+      
+          <button id="showMoreBtn">Show more…</button>
+          <div id="notecard-extra" class="hidden">
+            <p><strong>Capital:</strong> <span id="notecard-capital"></span></p>
+            <p><strong>Landmark:</strong> <span id="notecard-landmark"></span></p>
+            <div id="notecard-gallery" style="display: flex; gap: 8px; margin-top: 10px;">
+              <img class="notecard-pics" />
+              <img class="notecard-pics" />
+              <img class="notecard-pics" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside id="sidebar">
+      <div id="sidebar-scroll">
+        <div class="sidebar-top-buttons">
+          <button class="sidebar-tab active">Where to?</button>
+          <button class="sidebar-tab">My Trips</button>
+        </div>
+    
+        <div class="sidebar-section" id="whereToSection">
+        <div class="dropdown">
+          <div class="dropdown-header">COUNTRIES ▾</div>
+          <div class="dropdown-content">
+            <div class="dropdown-item" data-country="BH">Bahrain</div>
+            <div class="dropdown-item" data-country="CY">Cyprus</div>
+            <div class="dropdown-item" data-country="EG">Egypt</div>
+            <div class="dropdown-item" data-country="IR">Iran</div>
+            <div class="dropdown-item" data-country="IQ">Iraq</div>
+            <div class="dropdown-item" data-country="JO">Jordan</div>
+            <div class="dropdown-item" data-country="KW">Kuwait</div>
+            <div class="dropdown-item" data-country="LB">Lebanon</div>
+            <div class="dropdown-item" data-country="OM">Oman</div>
+            <div class="dropdown-item" data-country="PS">Palestine</div>
+            <div class="dropdown-item" data-country="QA">Qatar</div>
+            <div class="dropdown-item" data-country="SA">Saudi Arabia</div>
+            <div class="dropdown-item" data-country="SY">Syria</div>
+            <div class="dropdown-item" data-country="TR">Türkiye</div>
+            <div class="dropdown-item" data-country="AE">United Arab Emirates</div>
+            <div class="dropdown-item" data-country="YE">Yemen</div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="dropdown-header">FILTER ▾</div>
+          <div class="dropdown-content">
+            <div class="dropdown-item" data-filter="weather">weather</div>
+            <div class="dropdown-item active" data-filter="languages">languages</div>
+            <div class="dropdown-item" data-filter="distance">distance</div>
+            
+
+            <div id="weather-controls" class="hidden">
+              <hr/>
+              <div class="control-row">
+                <label for="weather-month">Month:</label>
+                <select id="weather-month">
+                  <option value="0">January</option>
+                  <option value="1">February</option>
+                  <option value="2">March</option>
+                  <option value="3">April</option>
+                  <option value="4">May</option>
+                  <option value="5">June</option>
+                  <option value="6">July</option>
+                  <option value="7">August</option>
+                  <option value="8">September</option>
+                  <option value="9">October</option>
+                  <option value="10">November</option>
+                  <option value="11">December</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label for="weather-min">Min °C:</label>
+                <input type="number" id="weather-min" value="15"/>
+              </div>
+              <div class="control-row">
+                <label for="weather-max">Max °C:</label>
+                <input type="number" id="weather-max" value="30"/>
+              </div>
+              <div class="control-row">
+                <button id="apply-weather-filter">Apply Weather Filter</button>
+              </div>
+              <div id="weather-results"></div>
+            </div>
+
+            <div id="languages-controls">
+              <hr/>
+              <div class="control-row">
+                <label for="language-select">Select Language:</label>
+                <select id="language-select">
+                  <option value="">-- Select a Language --</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <button id="apply-language-filter">Apply Language Filter</button>
+              </div>
+              <div id="language-results"></div>
+            </div>
+
+            <div id="distance-controls" class="hidden">
+              <hr/>
+              <div class="control-row">
+                <button id="use-my-location">Use My Current Location</button>
+                <span id="location-status"></span>
+              </div>
+              <div class="control-row">
+                <label for="distance-ref">Reference location:</label>
+                <select id="distance-ref">
+                  <option value="">-- Select a location --</option>
+                  <option value="current">Current Location</option>
+                  <option value="AE">United Arab Emirates</option>
+                  <option value="BH">Bahrain</option>
+                  <option value="CY">Cyprus</option>
+                  <option value="EG">Egypt</option>
+                  <option value="IR">Iran</option>
+                  <option value="IQ">Iraq</option>
+                  <option value="JO">Jordan</option>
+                  <option value="KW">Kuwait</option>
+                  <option value="LB">Lebanon</option>
+                  <option value="OM">Oman</option>
+                  <option value="PS">Palestine</option>
+                  <option value="QA">Qatar</option>
+                  <option value="SA">Saudi Arabia</option>
+                  <option value="SY">Syria</option>
+                  <option value="TR">Türkiye</option>
+                  <option value="YE">Yemen</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label for="distance-max">Max distance (km):</label>
+                <input type="number" id="distance-max" value="500"/>
+              </div>
+              <div class="control-row">
+                <button id="apply-distance-filter">Apply Distance Filter</button>
+              </div>
+              <div id="distance-results"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section hidden" id="myTripsSection">
+        <h3>My Trips</h3>
+        <form id="tripChecklist" class="trip-checklist">
+          <label><input type="checkbox" value="AE" /> United Arab Emirates</label><br>
+          <label><input type="checkbox" value="BH" /> Bahrain</label><br>
+          <label><input type="checkbox" value="CY" /> Cyprus</label><br>
+          <label><input type="checkbox" value="EG" /> Egypt</label><br>
+          <label><input type="checkbox" value="IR" /> Iran</label><br>
+          <label><input type="checkbox" value="IQ" /> Iraq</label><br>
+          <label><input type="checkbox" value="JO" /> Jordan</label><br>
+          <label><input type="checkbox" value="KW" /> Kuwait</label><br>
+          <label><input type="checkbox" value="LB" /> Lebanon</label><br>
+          <label><input type="checkbox" value="OM" /> Oman</label><br>
+          <label><input type="checkbox" value="PS" /> Palestine</label><br>
+          <label><input type="checkbox" value="QA" /> Qatar</label><br>
+          <label><input type="checkbox" value="SA" /> Saudi Arabia</label><br>
+          <label><input type="checkbox" value="SY" /> Syria</label><br>
+          <label><input type="checkbox" value="TR" /> Türkiye</label><br>
+          <label><input type="checkbox" value="YE" /> Yemen</label>
+        </form>
+      </div>
+      <div id="random-btn-container">
+        <button id="randomDestinationBtn" class="sidebar-action-button">Random Destination</button>
+      </div>
+    </aside>
+  </div>
+
+  <script src="index.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
+
+
+
+

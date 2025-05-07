@@ -1,0 +1,20 @@
+{
+  "trips": {
+    "1745130803207": [],
+    "1745138257025": [],
+    "1745330926963": [
+      "IR"
+    ],
+    "1746253885398": []
+  },
+  "users": {
+    "1745130803207": {
+      "username": "layana",
+      "passwordHash": "$2b$10$psnlFqsYYwkpXtFMSlhHZOrw6V0Vw3IsnvAM4ekVCqzcgy1VQLoSm"
+    },
+    "1745315684102": {
+      "username": "samy",
+      "passwordHash": "$2b$10$u4tIoXNxMYLxCcoE2tuA..lLW/8STJEnzuVyAE0gfMFebxieJU8RK"
+    }
+  }
+}

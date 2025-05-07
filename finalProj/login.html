@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Log In</title>
+  <link rel="stylesheet" href="index.css"/>
+</head>
+<body class="login-page">
+  <header>
+    <div class="header-content">
+      <div class="site-title">
+        <h1>Travel Tracker</h1>
+        <div class="subtitle">~ Middle East Version ~</div>
+      </div>
+      <nav class="site-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="login.html" class="nav-link">Login/Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="auth-container">
+      <h1 class="auth-title">Log In</h1>
+      <form id="loginForm" class="auth-form" novalidate>
+        <label for="li-username">Username</label>
+        <input id="li-username" type="text" />
+
+        <label for="li-password">Password</label>
+        <input id="li-password" type="password" />
+
+        <p id="li-error" class="error"></p>
+        <button type="submit">Log In</button>
+      </form>
+      <p class="auth-switch">
+        Don’t have an account? <a href="signup.html">Sign Up</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="login.js"></script>
+  <script src="auth.js"></script>
+  </body>
+</html>
